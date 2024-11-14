@@ -1,0 +1,87 @@
+create
+
+-------------------------------------------------------------------------------------
+
+db.class.insertOne({
+    roll_no: 1,
+    name: "John Doe",
+    subject: "Mathematics",
+    grade: "A"
+});
+
+
+db.class.insertMany([
+    { roll_no: 2, name: "Jane Smith", subject: "Science", grade: "B" },
+    { roll_no: 3, name: "Alice Johnson", subject: "English", grade: "A" },
+    { roll_no: 4, name: "Bob Brown", subject: "History", grade: "C" }
+]);
+
+------------------------------------------------------------------------------------
+
+
+
+
+
+Read
+
+------------------------------------------------------------------------------------
+
+db.class.findOne({ roll_no: 1 });
+
+
+
+db.class.find();  // This will return all documents
+
+
+
+db.class.find({ grade: "A" });  // only the names with grade a will be printed
+
+
+
+db.class.find({}, { name: 1, grade: 1 });  //only name and grade will be printed from all the database
+
+-------------------------------------------------------------------------------------
+
+
+
+
+update
+
+---------------------------------------------------------------------------------------
+
+db.class.updateOne(
+    { roll_no: 1 },                      // Filter
+    { $set: { grade: "A+" } }            // Update operation
+);
+
+
+
+db.class.updateMany(
+    { subject: "Science" },              // Filter
+    { $set: { grade: "B" } }             // Update operation
+);
+
+
+
+
+db.class.updateOne(
+    { roll_no: 2 },
+    { $set: { age: 20 } }
+);
+
+---------------------------------------------------------------------------------
+
+
+
+
+delete
+
+----------------------------------------------------------------------------------
+
+db.class.deleteOne({ roll_no: 4 });
+
+
+db.class.deleteMany({ grade: "C" });
+
+
+---------------------------------------------------------------------------------

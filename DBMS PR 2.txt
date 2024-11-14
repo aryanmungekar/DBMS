@@ -1,0 +1,180 @@
+create database company;
+use company;
+
+create table employee(
+id int,
+name varchar(25),
+age int );
+
+insert into employee 
+(id,name ,age) values
+(1,"aryan",21),
+(2,"pranavi",20),
+(3,"rutuja",20),
+(4,"om",21),
+(5,"gaurav",20);
+
+create table section(
+s_id int,s_name varchar(25));
+
+insert into section 
+(s_id , s_name) values
+(1,"IT"),
+(2,"COMP"),
+(4,"AIDS"),
+(7,"E&TC"),
+(9,"CIVIL");
+
+
+SELECT * FROM EMPLOYEE;
+SELECT * FROM SECTION;
+
+
+#INNER JOIN
+
+SELECT *
+FROM EMPLOYEE
+INNER JOIN SECTION 
+ON EMPLOYEE.ID = SECTION.S_ID;
+
+
+#OUTER JOIN
+
+SELECT *
+FROM EMPLOYEE AS E
+LEFT JOIN SECTION AS S
+ON E.ID = S.S_ID;
+
+
+SELECT *
+FROM EMPLOYEE AS E
+RIGHT JOIN SECTION AS S
+ON E.ID = S.S_ID;
+
+
+SELECT *
+FROM EMPLOYEE AS E
+LEFT JOIN SECTION AS S
+ON E.ID = S.S_ID
+UNION
+SELECT *
+FROM EMPLOYEE AS E
+RIGHT JOIN SECTION AS S
+ON E.ID = S.S_ID;
+
+
+SELECT *
+FROM EMPLOYEE AS E
+LEFT JOIN SECTION AS S
+ON E.ID = S.S_ID
+WHERE S.S_ID IS NULL;
+
+SELECT *
+FROM EMPLOYEE AS E
+RIGHT JOIN SECTION AS S
+ON E.ID = S.S_ID
+WHERE E.ID IS NULL;
+
+
+#SELF JOIN
+
+CREATE TABLE P(
+ID INT primary KEY,
+NAME VARCHAR(25),
+MANAGER_ID INT);
+
+INSERT INTO P 
+( ID, NAME , MANAGER_ID)
+VALUES 
+(101 ,"GOLI",103),
+(102,"BOB",104),
+(103,"SONU",NULL),
+(104,"DON",103);
+
+SELECT * FROM P;
+
+SELECT A.NAME AS MANAGER_NAME, B.NAME
+FROM P AS A
+JOIN P AS B
+ON A.ID = B.MANAGER_ID;
+
+select * 
+from employee
+cross join section;
+
+select id ,name
+from employee 
+cross join section;
+
+
+#SUBQUERY
+
+create database college;
+use college;
+
+create table student(
+s_id int primary key,
+s_name varchar(25),
+s_add varchar(25),
+s_marks int
+);
+
+
+insert into student
+(ROLLNO , NAME , CITY , marks)
+values
+(1,"pranavi","dahiwadi",90),
+(2,"aryan","kankawali",85),
+(3,"rutuja","dhayari",80),
+(4,"om","wai",93),
+(5,"kishan","amravati",95),
+(6,"gaurav","baramati",75);
+
+select * from student;
+
+SELECT AVG (MARKS)
+FROM YEDELOK;
+
+SELECT NAME ,MARKS
+FROM STUDENT
+WHERE MARKS >(SELECT AVG (MARKS)
+FROM STUDENT);
+
+
+SELECT * FROM STUDENT
+where ROLLNO % 2=0;
+
+SELECT NAME FROM STUDENT
+WHERE ROLLNO IN (SELECT * FROM STUDENT
+where ROLLNO % 2=0);
+
+SELECT MAX(MARKS)FROM(SELECT * FROM STUDENT WHERE CITY = "PUNE") AS TEMP;
+
+create table d(rollno int , name varchar(25));
+
+insert into d (rollno ,name) 
+select rollno, name 
+from STUDENT
+where marks >75;
+
+select * from d;
+
+#VIEW
+
+CREATE VIEW VIEW1 AS 
+SELECT ROLLNO,NAME FROM STUDENT;
+
+SELECT * FROM VIEW1;
+
+DROP VIEW VIEW1;
+
+
+
+
+
+
+
+
+
+
+
